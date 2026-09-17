@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guitar Trainer - Rhythm & Pitch Master</title>
+    <!-- VexFlow Library for rendering sheet music -->
+    <script src="https://cdn.jsdelivr.net/npm/vexflow@4.2.2/build/cjs/vexflow.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- HTML LAYOUT SECTION                        -->
+    <!-- ========================================== -->
+
+    <!-- Dashboard / Selection Screen -->
+    <div id="list-screen" class="screen active-screen">
+        <h1 style="color: var(--text); margin-top: 0;">Guitar Trainer</h1>
+        
+        <div class="mode-selector">
+            <button id="tab-train-btn" class="mode-btn active" onclick="switchDashboardTab('training')">Single Note Practice</button>
+            <button id="tab-songs-btn" class="mode-btn" onclick="switchDashboardTab('songs')">Songs</button>
+        </div>
+
+        <!-- Tab 1: Single Note Training -->
+        <div id="view-training" class="view-container active-view">
+            <div class="training-card" onclick="initGameSession('training', null)">
+                <div style="font-size: 50px; margin-bottom: 15px;">🎯</div>
+                <h3 style="color: var(--text); font-size: 20px; margin: 0 0 10px 0;">Random Note Challenge</h3>
+                <p style="color: #7f8c8d; margin: 0;">Practice finding and playing individual notes across the fretboard with real-time feedback.</p>
+            </div>
+        </div>
+
+        <!-- Tab 2: Song Library -->
+        <div id="view-songs" class="view-container">
+            <div id="song-list" class="song-grid">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Practice / Game Screen -->
+    <div id="game-screen" class="screen">
+        <div id="game-card">
+            <div class="header-section">
+                <h2 id="game-title">Song Title</h2>
+            </div>
+            
+            <div id="staff-viewport">
+                <div id="target-line"></div>
+                <div id="staff-canvas"></div>
+            </div>
+
+            <!-- Visual Fretboard Hint Card (Only shown during training mode on errors) -->
+            <div id="hint-tab-card">
+                <p>💡 Fingering Hint (Fretboard View)</p>
+                <canvas id="fretboard-canvas" width="420" height="90"></canvas>
+            </div>
+
+            <p id="hint-msg">Press Start to Begin!</p>
+
+            <div class="controls">
+                <button class="action-btn btn-back" onclick="exitGameSession()">◀ Back</button>
+                <button class="action-btn btn-listen" id="listen-btn" onclick="runDemoMode()">🎵 Listen First</button>
+                <button class="action-btn btn-start" id="start-btn" onclick="startPracticeLoop()">▶ Start Playing</button>
+                <button class="action-btn btn-replay" id="replay-btn" onclick="playBackRecording()">🔄 Hear My Recording</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
