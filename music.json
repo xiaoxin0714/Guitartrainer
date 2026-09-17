@@ -1,0 +1,60 @@
+{
+  "twinkle": {
+    "title": "🌟 Twinkle Twinkle Little Star",
+    "difficulty": "Beginner",
+    "data": [
+      { "note": "C4", "vex": "c/4", "label": "1 (C)", "type": "q", "beats": 1 },
+      { "note": "C4", "vex": "c/4", "label": "1 (C)", "type": "q", "beats": 1 },
+      { "note": "G4", "vex": "g/4", "label": "5 (G)", "type": "q", "beats": 1 },
+      { "note": "G4", "vex": "g/4", "label": "5 (G)", "type": "q", "beats": 1 },
+      { "note": "A4", "vex": "a/4", "label": "6 (A)", "type": "q", "beats": 1 },
+      { "note": "A4", "vex": "a/4", "label": "6 (A)", "type": "q", "beats": 1 },
+      { "note": "G4", "vex": "g/4", "label": "5 (G)", "type": "h", "beats": 2 },
+      { "note": "F4", "vex": "f/4", "label": "4 (F)", "type": "q", "beats": 1 },
+      { "note": "F4", "vex": "f/4", "label": "4 (F)", "type": "q", "beats": 1 },
+      { "note": "E4", "vex": "e/4", "label": "3 (E)", "type": "q", "beats": 1 },
+      { "note": "E4", "vex": "e/4", "label": "3 (E)", "type": "q", "beats": 1 },
+      { "note": "D4", "vex": "d/4", "label": "2 (D)", "type": "q", "beats": 1 },
+      { "note": "D4", "vex": "d/4", "label": "2 (D)", "type": "q", "beats": 1 },
+      { "note": "C4", "vex": "c/4", "label": "1 (C)", "type": "h", "beats": 2 }
+    ]
+  },
+  "buzz": {
+    "title": "🐝 Buzz Buzz Buzz",
+    "difficulty": "Beginner",
+    "data": [
+      { "note": "G4", "vex": "g/4", "label": "5 (G)", "type": "q", "beats": 1 },
+      { "note": "E4", "vex": "e/4", "label": "3 (E)", "type": "q", "beats": 1 },
+      { "note": "E4", "vex": "e/4", "label": "3 (E)", "type": "h", "beats": 2 },
+      { "note": "F4", "vex": "f/4", "label": "4 (F)", "type": "q", "beats": 1 },
+      { "note": "D4", "vex": "d/4", "label": "2 (D)", "type": "q", "beats": 1 },
+      { "note": "D4", "vex": "d/4", "label": "2 (D)", "type": "h", "beats": 2 },
+      { "note": "C4", "vex": "c/4", "label": "1 (C)", "type": "q", "beats": 1 },
+      { "note": "D4", "vex": "d/4", "label": "2 (D)", "type": "q", "beats": 1 },
+      { "note": "E4", "vex": "e/4", "label": "3 (E)", "type": "q", "beats": 1 },
+      { "note": "F4", "vex": "f/4", "label": "4 (F)", "type": "q", "beats": 1 },
+      { "note": "G4", "vex": "g/4", "label": "5 (G)", "type": "q", "beats": 1 },
+      { "note": "G4", "vex": "g/4", "label": "5 (G)", "type": "q", "beats": 1 },
+      { "note": "G4", "vex": "g/4", "label": "5 (G)", "type": "h", "beats": 2 }
+    ]
+  },
+  "mary": {
+    "title": "🐑 Mary Had a Little Lamb",
+    "difficulty": "Beginner",
+    "data": [
+      { "note": "E4", "vex": "e/4", "label": "3 (E)", "type": "q", "beats": 1 },
+      { "note": "D4", "vex": "d/4", "label": "2 (D)", "type": "q", "beats": 1 },
+      { "note": "C4", "vex": "c/4", "label": "1 (C)", "type": "q", "beats": 1 },
+      { "note": "D4", "vex": "d/4", "label": "2 (D)", "type": "q", "beats": 1 },
+      { "note": "E4", "vex": "e/4", "label": "3 (E)", "type": "q", "beats": 1 },
+      { "note": "E4", "vex": "e/4", "label": "3 (E)", "type": "q", "beats": 1 },
+      { "note": "E4", "vex": "e/4", "label": "3 (E)", "type": "h", "beats": 2 },
+      { "note": "D4", "vex": "d/4", "label": "2 (D)", "type": "q", "beats": 1 },
+      { "note": "D4", "vex": "d/4", "label": "2 (D)", "type": "q", "beats": 1 },
+      { "note": "D4", "vex": "d/4", "label": "2 (D)", "type": "h", "beats": 2 },
+      { "note": "E4", "vex": "e/4", "label": "3 (E)", "type": "q", "beats": 1 },
+      { "note": "G4", "vex": "g/4", "label": "5 (G)", "type": "q", "beats": 1 },
+      { "note": "G4", "vex": "g/4", "label": "5 (G)", "type": "h", "beats": 2 }
+    ]
+  }
+}

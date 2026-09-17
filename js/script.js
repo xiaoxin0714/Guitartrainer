@@ -13,49 +13,6 @@ const NOTE_MASTER = {
     "A4": { label: "6",  vex: "a/4", string: 1, fret: 5 }
 };
 
-// Dataset for Kids Pro Songs (Integrated Rhythm & Pitch)
-const SONGS = {
-    "twinkle": {
-        title: "🌟 Twinkle Twinkle Little Star",
-        data: [
-            { note: "C4", vex: "c/4", label: "1 (C)", type: "q", beats: 1 }, { note: "C4", vex: "c/4", label: "1 (C)", type: "q", beats: 1 }, 
-            { note: "G4", vex: "g/4", label: "5 (G)", type: "q", beats: 1 }, { note: "G4", vex: "g/4", label: "5 (G)", type: "q", beats: 1 },
-            { note: "A4", vex: "a/4", label: "6 (A)", type: "q", beats: 1 }, { note: "A4", vex: "a/4", label: "6 (A)", type: "q", beats: 1 }, 
-            { note: "G4", vex: "g/4", label: "5 (G)", type: "h", beats: 2 },
-            { note: "F4", vex: "f/4", label: "4 (F)", type: "q", beats: 1 }, { note: "F4", vex: "f/4", label: "4 (F)", type: "q", beats: 1 }, 
-            { note: "E4", vex: "e/4", label: "3 (E)", type: "q", beats: 1 }, { note: "E4", vex: "e/4", label: "3 (E)", type: "q", beats: 1 },
-            { note: "D4", vex: "d/4", label: "2 (D)", type: "q", beats: 1 }, { note: "D4", vex: "d/4", label: "2 (D)", type: "q", beats: 1 }, 
-            { note: "C4", vex: "c/4", label: "1 (C)", type: "h", beats: 2 }
-        ]
-    },
-    "buzz": {
-        title: "🐝 Buzz Buzz Buzz",
-        data: [
-            { note: "G4", vex: "g/4", label: "5 (G)", type: "q", beats: 1 }, { note: "E4", vex: "e/4", label: "3 (E)", type: "q", beats: 1 }, 
-            { note: "E4", vex: "e/4", label: "3 (E)", type: "h", beats: 2 },
-            { note: "F4", vex: "f/4", label: "4 (F)", type: "q", beats: 1 }, { note: "D4", vex: "d/4", label: "2 (D)", type: "q", beats: 1 }, 
-            { note: "D4", vex: "d/4", label: "2 (D)", type: "h", beats: 2 },
-            { note: "C4", vex: "c/4", label: "1 (C)", type: "q", beats: 1 }, { note: "D4", vex: "d/4", label: "2 (D)", type: "q", beats: 1 }, 
-            { note: "E4", vex: "e/4", label: "3 (E)", type: "q", beats: 1 }, { note: "F4", vex: "f/4", label: "4 (F)", type: "q", beats: 1 },
-            { note: "G4", vex: "g/4", label: "5 (G)", type: "q", beats: 1 }, { note: "G4", vex: "g/4", label: "5 (G)", type: "q", beats: 1 }, 
-            { note: "G4", vex: "g/4", label: "5 (G)", type: "h", beats: 2 }
-        ]
-    },
-    "mary": {
-        title: "🐑 Mary Had a Little Lamb",
-        data: [
-            { note: "E4", vex: "e/4", label: "3 (E)", type: "q", beats: 1 }, { note: "D4", vex: "d/4", label: "2 (D)", type: "q", beats: 1 },
-            { note: "C4", vex: "c/4", label: "1 (C)", type: "q", beats: 1 }, { note: "D4", vex: "d/4", label: "2 (D)", type: "q", beats: 1 },
-            { note: "E4", vex: "e/4", label: "3 (E)", type: "q", beats: 1 }, { note: "E4", vex: "e/4", label: "3 (E)", type: "q", beats: 1 },
-            { note: "E4", vex: "e/4", label: "3 (E)", type: "h", beats: 2 },
-            { note: "D4", vex: "d/4", label: "2 (D)", type: "q", beats: 1 }, { note: "D4", vex: "d/4", label: "2 (D)", type: "q", beats: 1 },
-            { note: "D4", vex: "d/4", label: "2 (D)", type: "h", beats: 2 },
-            { note: "E4", vex: "e/4", label: "3 (E)", type: "q", beats: 1 }, { note: "G4", vex: "g/4", label: "5 (G)", type: "q", beats: 1 },
-            { note: "G4", vex: "g/4", label: "5 (G)", type: "h", beats: 2 }
-        ]
-    }
-};
-
 const EN_NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 const NOTE_FREQS = {
     "G3": 196.0, "A3": 220.0, "B3": 246.9, 
@@ -65,6 +22,7 @@ const NOTE_FREQS = {
 
 // --- State Variables ---
 let currentMode = 'training'; // 'training' or 'songs'
+let SONGS = {}; // Global container for loaded song data
 let currentSongData = [];
 let currentIndex = 0;
 
@@ -85,7 +43,18 @@ let performanceData = [];
 let startTime = 0;
 
 
-// --- 2. Dashboard Navigation & Initialization ---
+// --- 2. Data Loading & Dashboard Navigation ---
+
+async function loadSongs() {
+    try {
+        const response = await fetch('./music.json');
+        if (!response.ok) throw new Error('Failed to load music.json');
+        SONGS = await response.json();
+        populateSongLibrary();
+    } catch (err) {
+        console.error('Error loading songs:', err);
+    }
+}
 
 function switchDashboardTab(tabMode) {
     // Toggle Buttons
@@ -107,7 +76,7 @@ function populateSongLibrary() {
         card.onclick = () => initGameSession('songs', key);
         card.innerHTML = `
             <h3>${song.title}</h3>
-            <span>Kids Pro Rhythm</span>
+            <span>${song.difficulty || 'Kids Pro Rhythm'}</span>
         `;
         container.appendChild(card);
     }
@@ -143,7 +112,7 @@ function initGameSession(mode, songKey) {
         generateRandomNoteAndRender();
     } else {
         document.getElementById('game-title').innerText = SONGS[songKey].title;
-        document.getElementById('hint-msg').innerText = 'Click "Listen" to hear the melody 🎵';
+        document.getElementById('hint-msg').innerText = 'Click "Listen" to hear the melody 🎧';
         document.getElementById('start-btn').innerText = "▶ Play Now";
         
         // Show song mode elements
@@ -386,7 +355,7 @@ function handleCorrectNote() {
     if (el) el.querySelectorAll('path').forEach(p => p.setAttribute('fill', '#2ecc71')); // Turn green
 
     if (currentMode === 'training') {
-        document.getElementById('hint-msg').innerText = "Correct! 🎉";
+        document.getElementById('hint-msg').innerText = "Correct! ✨";
         isPlaying = false;
         
         // Generate next random note automatically
@@ -412,7 +381,7 @@ function handleCorrectNote() {
             document.getElementById('hint-msg').innerText = "Next: " + currentSongData[currentIndex].note;
         } else {
             isPlaying = false;
-            document.getElementById('hint-msg').innerText = "Awesome job! Song Completed! 🌟";
+            document.getElementById('hint-msg').innerText = "Awesome job! Song Completed! 🎉";
             document.getElementById('start-btn').disabled = false;
             document.getElementById('listen-btn').disabled = false;
             document.getElementById('replay-btn').style.display = 'inline-block';
@@ -422,7 +391,7 @@ function handleCorrectNote() {
 
 function handleWrongNote() {
     wrongPitchCount++;
-    // Display fretboard hint for Single Note mode after 2 incorrect readings
+    // Display fretboard hint for Single Note mode after wrong pitch detected
     if (wrongPitchCount > 30) { // Approx 0.5s of holding wrong pitch at 60fps
         const noteData = currentSongData[currentIndex];
         document.getElementById('hint-tab-card').style.display = 'block';
@@ -549,7 +518,7 @@ function playSynth(note, durationSec = 0.5) {
 
 
 // --- 7. OnLoad Initializer ---
-window.onload = () => {
-    populateSongLibrary();
+window.onload = async () => {
+    await loadSongs(); // Load music.json dynamically before rendering
     switchDashboardTab('training'); // Default to Random Note Training
 };
